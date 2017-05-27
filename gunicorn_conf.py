@@ -7,6 +7,9 @@ backlog = 2048
 workers = 2
 worker_connections = 1000
 keepalive = 2
+access_logfile = 'access.log'
+error_logfile = 'error.log'
+log_level = 'info'
 
 
 def post_fork(server, worker):

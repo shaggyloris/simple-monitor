@@ -33,7 +33,7 @@ def setup():
         print('Database not found, creating new database')
         db.create_all()
         print('Database created!')
-        print('You can test the server by running "python manage.py runserver"')
+        print('You can start the server by running "gunicorn -c gunicorn_conf.py manage:app"')
 
 
 if __name__ == '__main__':

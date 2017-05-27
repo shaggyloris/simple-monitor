@@ -13,7 +13,6 @@ Original design and concept by circa10a can be found [here](https://github.com/c
 - Run the web server `gunicorn -c gunicorn_conf.py manage:app`
 - Server will be available on [hostname]:8000
 
-
 ## Docker setup
 - Clone the git repository
 - Build the docker image: `docker build -t myrepo/simple-monitor .`
@@ -29,6 +28,9 @@ Original design and concept by circa10a can be found [here](https://github.com/c
 - To delete or edit a device, click the manage devices link and click the host tabs. 
 - Click run report to ping all devices right now.
 - If you would like auto reporting, set the 'run_report' script on a cron job. Alternatively, sending an empty POST request to [hostname]:8000/check-devices will poll all devices. 
+
+## Known Issues
+- Cron job is not properly running for docker containers.
 
 ## Screenshots
 ![alt text](http://i.imgur.com/gbmsw9T.jpg)
