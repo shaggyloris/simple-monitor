@@ -44,8 +44,8 @@ def check_hosts():
     if request.method == 'POST':
         if len(hosts) == 0:
             return jsonify({}, 204)
-        report.check_hosts()
-        return jsonify({}, 202)
+        return_data = report.check_hosts()
+        return jsonify(return_data, 202)
     else:
         if len(hosts) == 0:
             return redirect(url_for('main.index'))

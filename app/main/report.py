@@ -29,18 +29,24 @@ def check_hosts():
     
     If host is up returns true, else will return false
     """
+    return_data = {}
     hosts = Hosts.query.all()
     for host in hosts:
         fqdn = host.fqdn
         port = host.port
         if port is not None:
+            return_name = fqdn + ':' + str(port)
             test = check_sock(fqdn, port)
         else:
+            return_name = fqdn
             test = ping_host(fqdn)
         timestamp = datetime.now()
         host.status = test
         host.last_checked = timestamp
         db.session.add(host)
+        return_data[return_name] = test
+    return return_data
+
 
 
 def ping_host(hostname):
