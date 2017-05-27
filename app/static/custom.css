@@ -1,0 +1,6 @@
+/* This is the custom css stylesheet used to override bootstrap styles as well as defined our own styles for different
+classes, tag ids, etc...
+*/
+.navbar {
+    border-radius:0;
+}

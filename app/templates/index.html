@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Device Monitor{% endblock %}
+
+{% block page_content %}
+
+	<div id="circle"><strong></strong></div>
+	<script>
+	$('#circle').circleProgress({
+		value: "{{ percent_up }}",
+		size: 350,
+		thickness: 10,
+		emptyFill: "#262b33",
+		fill: { color: ["#1BA1E2"]}
+	}).on('circle-animation-progress', function(event, progress, stepValue) {$(this).children('strong').text((stepValue * 100).toFixed(0) + '%');});
+	</script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/circlesize.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+	<script>
+	noty({
+    text: "Report created " + "{{ timestamp }}",
+    type: 'information',
+    theme: 'metroui',
+    closeWith   : ['click'],
+    progressBar : true,
+    timeout     : 10000,
+    animation   : {
+      open  : 'animated bounceInRight',
+      close : 'animated bounceOutRight',
+      easing: 'swing'
+    }
+  });
+	</script>
+
+	<div class="table-title">
+        <h3></h3>
+    </div>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th width="65%" class="text-left">Device</th>
+                <th width="35%" class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            {% for h in hosts %}
+                <tr>
+                    <td onClick="window.open('{{ h.fqdn + ':' ~ h.port }}')"; class="text-left">
+                        {% if h.friendly_name != None %}
+                            {{ h.friendly_name }}
+                        {% elif h.port != None %}
+                            {{ h.fqdn + ' port: ' ~ h.port }}
+                        {% else %}
+                            {{ h.fqdn + ' PING' }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if h.status == False %}
+                        <div class="led-red"></div>
+                        {% else %}
+                        <div class="led-green"></div>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{#
+    This page is not ended to be rendered alone, so it does not extend anything and does not have most of the standard
+    html tags you would find in a static html file. Since the base template has the {% include "navbar.html" %} the code
+    below will be injected into the base template. After that, since every page is extending the base template, the
+    navbar will remain the same throughout the site.
+#}
+<nav class="navbar navbar-inverse" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Device Monitor</a>
+		</div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('main.check_hosts') }}">Run Report</a></li>
+                <li><button type="button" class="btn btn-danger navbar-btn" data-toggle="modal" data-target="#myModal">Add Device</button></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('admin.index') }}">Manage Devices</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
