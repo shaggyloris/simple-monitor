@@ -25,7 +25,7 @@ ENV FLASK_CONFIG="production"
 # Create the empty database
 RUN python manage.py setup
 
-RUN crond
+RUN crond -l 4 -L /var/log/cron.log
 
 # Startup the cron service and gunicorn
-CMD ["gunicorn", "-c", "gunicorn_conf.py", "manage:app"]
+CMD crond && gunicorn -c gunicorn_conf.py manage:app
