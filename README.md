@@ -1,3 +1,6 @@
+# Update
+- This has been moved to a fork of the original project, please use the new repo [here](https://github.com/shaggyloris/Device-Monitor-Dashboard)
+
 Simple Device Monitor
 ===
 
